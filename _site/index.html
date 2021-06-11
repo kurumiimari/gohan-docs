@@ -1,0 +1,1234 @@
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" media="screen" rel="stylesheet">
+    <link href="slate/css/print.css" media="print" rel="stylesheet">
+    <link href="slate/css/screen.css" media="screen" rel="stylesheet">
+    <script src="slate/js/lib/jquery.min.js"></script>
+    <script src="slate/js/lib/jquery.highlight.js"></script>
+    <script src="slate/js/lib/energize.js"></script>
+    <script src="slate/js/lib/imagesloaded.min.js"></script>
+    <script src="slate/js/lib/lunr.min.js"></script>
+    <script src="slate/js/app/lang.js"></script>
+    <script src="slate/js/app/toc.js"></script>
+    
+    <script src="slate/js/app/search.js"></script>
+    
+    
+    <script src="slate/js/app/copy.js"></script>
+    
+    <script type="text/javascript">
+      function adjustLanguageSelectorWidth() {
+        const elem = $('.dark-box > .lang-selector');
+        elem.width(elem.parent().width());
+      }
+      $(function() {
+        loadToc($('#toc'), '.toc-link', '.toc-list-h2, .toc-list-h3, .toc-list-h4, .toc-list-h5, .toc-list-h6', 10);
+        setupLanguages($('body').data('languages'));
+        $('.content').imagesLoaded( function() {
+          recacheHeights();
+          refreshToc();
+        });
+        $(window).resize(function() {
+          adjustLanguageSelectorWidth();
+        });
+        adjustLanguageSelectorWidth();
+      });
+      window.onpopstate = function() {
+        activateLanguage(getLanguageFromQueryString());
+      };
+    </script>
+    <!-- slate; content for the head element from source/includes/head.ejs -->
+<meta name="theme-color" content="#F3F7F9">
+
+  </head>
+
+  <body data-languages="[&quot;shell&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="slate/img/navbar.png" alt="Navigation">
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="slate/img/logo.png" alt="Logo" class="logo">
+      
+        <div class="lang-selector">
+          
+            
+              <a href="#" data-language-name="shell">shell</a>
+            
+          
+        </div>
+      
+      
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      
+
+      
+
+      <div id="toc" class="toc-list-h1">
+	  	<ul class="toc-list-h1">
+        
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+            
+          </li>
+        
+          <li>
+            <a href="#installation" class="toc-h1 toc-link" data-title="Installation">Installation</a>
+            
+          </li>
+        
+          <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+            
+          </li>
+        
+          <li>
+            <a href="#node" class="toc-h1 toc-link" data-title="Node">Node</a>
+            
+              <ul class="toc-list-h2">
+                
+                  <li>
+                    <a href="#get-node-status" class="toc-h2 toc-link" data-title="">Get Node Status</a>
+                    
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="#wallets" class="toc-h1 toc-link" data-title="Wallets">Wallets</a>
+            
+              <ul class="toc-list-h2">
+                
+                  <li>
+                    <a href="#create-wallet" class="toc-h2 toc-link" data-title="">Create Wallet</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#list-wallets" class="toc-h2 toc-link" data-title="">List Wallets</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#list-wallet-accounts" class="toc-h2 toc-link" data-title="">List Wallet Accounts</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#unlock" class="toc-h2 toc-link" data-title="">Unlock</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#lock" class="toc-h2 toc-link" data-title="">Lock</a>
+                    
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="#accounts" class="toc-h1 toc-link" data-title="Accounts">Accounts</a>
+            
+              <ul class="toc-list-h2">
+                
+                  <li>
+                    <a href="#get-info" class="toc-h2 toc-link" data-title="">Get Info</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#get-transactions" class="toc-h2 toc-link" data-title="">Get Transactions</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#get-names" class="toc-h2 toc-link" data-title="">Get Names</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#get-name-history" class="toc-h2 toc-link" data-title="">Get Name History</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#get-unspent-bids" class="toc-h2 toc-link" data-title="">Get Unspent Bids</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#get-unspent-reveals" class="toc-h2 toc-link" data-title="">Get Unspent Reveals</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#rescan" class="toc-h2 toc-link" data-title="">Rescan</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#zap" class="toc-h2 toc-link" data-title="">Zap</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#sign-message" class="toc-h2 toc-link" data-title="">Sign Message</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#sign-message-with-name" class="toc-h2 toc-link" data-title="">Sign Message With Name</a>
+                    
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="#sending-transactions" class="toc-h1 toc-link" data-title="Sending Transactions">Sending Transactions</a>
+            
+              <ul class="toc-list-h2">
+                
+                  <li>
+                    <a href="#send-funds" class="toc-h2 toc-link" data-title="">Send Funds</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#send-open" class="toc-h2 toc-link" data-title="">Send Open</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#send-bid" class="toc-h2 toc-link" data-title="">Send Bid</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#send-reveal" class="toc-h2 toc-link" data-title="">Send Reveal</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#send-redeem" class="toc-h2 toc-link" data-title="">Send Redeem</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#send-update" class="toc-h2 toc-link" data-title="">Send Update</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#send-transfer" class="toc-h2 toc-link" data-title="">Send Transfer</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#send-finalize" class="toc-h2 toc-link" data-title="">Send Finalize</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#send-revoke" class="toc-h2 toc-link" data-title="">Send Revoke</a>
+                    
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+		</ul>
+      </div>
+      
+        <ul class="toc-footer">
+          
+            <li><a href='https://github.com/kurumiimari/gohan'>View Gohan Source</a></li>
+          
+            <li><a href='https://github.com/kurumiimari/gohan-docs'>View Docs Source</a></li>
+          
+            <li><a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a></li>
+          
+        </ul>
+      
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="introduction">Introduction</h1>
+<p>Gohan is an alternative Handshake wallet node. Its goals are the following:</p>
+<ol>
+<li>Provide a high-performance, even on low-specced devices.</li>
+<li>Expose a unified, RESTful wallet management API.</li>
+<li>Securely custody names and funds without sacrificing user experience.</li>
+<li>Make it easy to embed Gohan into other applications.</li>
+</ol>
+<p>The Gohan binary contains both the wallet server as well as a CLI client.</p>
+<h1 id="installation">Installation</h1>
+<p>Follow these steps to install Gohan as a standalone wallet daemon:</p>
+<ol>
+<li>Download the appropriate release for your OS/architecture.</li>
+<li>Verify the download (optional, but recommended.)</li>
+<li>Move Gohan onto your <code>$PATH</code>.</li>
+</ol>
+<p>Gohan has no external dependencies, so you can run it right away by running <code>gohan start</code>. By default, it will try to connect to a mainnet Handshake node running on your local machine. If this isn’t your setup, you can specify the following flags to configure how Gohan connects to the Handshake network:</p>
+<ul>
+<li><code>--network</code>: Can be <code>main</code>, <code>simnet</code>, <code>regtest</code>, or <code>testnet</code>.</li>
+<li><code>--server-url</code>: Full URL to a Handshake full node. Useful if your full node is running on a non-standard port. This is common for hosted nodes, which run over HTTPS on port 443.</li>
+<li><code>--server-api-key</code>: API key for the Handshake full node.</li>
+</ul>
+<aside class="notice">
+  If you are running your own <code>hsd</code> node, make sure to run it with the <code>--no-wallet</code> flag.
+</aside>
+<h1 id="authentication">Authentication</h1>
+<blockquote>
+<p>To start Gohan in API key mode:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan --api-key your-api-key-here start</code></pre>
+<blockquote>
+<p>To talk to Gohan using cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> -H <span class="token string">'X-API-Key: your-api-key-here'</span> http://localhost:12039</code></pre>
+<blockquote>
+<p>To talk to Gohan using the Gohan CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan --wallet-api-key your-api-key-here status</code></pre>
+<p>Gohan has two levels of authentication: API key authentication, and wallet authentication.</p>
+<p>To specify an API key, use the <code>--wallet-api-key</code> flag when running <code>gohan start</code>. When making requests, include the API key in a header that looks like the one below:</p>
+<p><code>X-API-Key: your-api-key-here</code>.</p>
+<p>If you’re using the Gohan CLI to make requests, use the <code>--wallet-api-key</code> flag to include the API key.</p>
+<h1 id="node">Node</h1>
+<h2 id="get-node-status">Get Node Status</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan status</code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> http://localhost:12039/api/v1/status</code></pre>
+<blockquote>
+<p>Returns JSON structured like this:</p>
+</blockquote>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"status"</span><span class="token operator">:</span> <span class="token string">"OK"</span><span class="token punctuation">,</span><br>  <span class="token property">"height"</span><span class="token operator">:</span> <span class="token number">71614</span><span class="token punctuation">,</span><br>  <span class="token property">"mem_usage"</span><span class="token operator">:</span> <span class="token number">8945720</span><span class="token punctuation">,</span><br>  <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">""</span><br><span class="token punctuation">}</span></code></pre>
+<p>Returns information about the wallet node’s status.</p>
+<h3 id="http-request">HTTP Request</h3>
+<p><code>GET /api/v1/status</code></p>
+<h1 id="wallets">Wallets</h1>
+<p>A single Gohan instance can support multiple wallets. Each wallet is identified by a name, which the user specifies during wallet creation. By default, the CLI specifies a wallet ID of <code>primary</code> for all CLI commands. This can be changed by using the <code>--wallet/-w</code> flags.</p>
+<p>Unlike <code>hsd</code>, Gohan does not create a default wallet on startup.</p>
+<h2 id="create-wallet">Create Wallet</h2>
+<blockquote>
+<p>Import a mnemonic via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan -w your-wallet-name <span class="token function">import</span></code></pre>
+<blockquote>
+<p>Import a mnemonic via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> -X POST --data <span class="token string">'{"name": "your-wallet-name", "mnemonic": "your-mnemonic-here", "password": "your-password-here"}'</span></code></pre>
+<blockquote>
+<p>JSON response:</p>
+</blockquote>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"your-wallet-name"</span><span class="token punctuation">,</span><br>  <span class="token property">"watch_only"</span><span class="token operator">:</span> <span class="token boolean">false</span><br><span class="token punctuation">}</span><br></code></pre>
+<blockquote>
+<p>Create a wallet via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan -w your-wallet-name create</code></pre>
+<blockquote>
+<p>Create a wallet via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> -X POST --data <span class="token string">'{"name": "your-wallet-name", "password": "your-password-here"}'</span></code></pre>
+<blockquote>
+<p>JSON response:</p>
+</blockquote>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"your-wallet-name"</span><span class="token punctuation">,</span><br>  <span class="token property">"mnemonic"</span><span class="token operator">:</span> <span class="token string">"drum virus cave hurdle memory awful cable frog pulse avocado picnic rifle tourist job usage audit inject hill sport love merry mango uniform evil"</span><span class="token punctuation">,</span><br>  <span class="token property">"watch_only"</span><span class="token operator">:</span> <span class="token boolean">false</span><br><span class="token punctuation">}</span></code></pre>
+<p>Creates a wallet. Gohan supports creating wallets in three different ways:</p>
+<ol>
+<li>By importing an existing BIP39 mnemonic.</li>
+<li>By importing an existing extended public key.</li>
+<li>By generating a wallet with a random seed phrase.</li>
+</ol>
+<p>In all cases, the endpoint requires a password to encrypt the wallet.</p>
+<p>The CLI commands are interactive, and will ask you to paste in your mnemonic and create a password via STDIN.</p>
+<h3 id="http-request-1">HTTP Request</h3>
+<p><code>POST /api/v1/wallets</code></p>
+<h3 id="json-parameters">JSON Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>primary</td>
+<td>Sets the wallet’s name.</td>
+</tr>
+<tr>
+<td>mnemonic</td>
+<td>none</td>
+<td>If set, imports the given BIP39 mnemonic. If neither xpub nor mnemonic is specified, a mnemonic will be generated for you and returned.</td>
+</tr>
+<tr>
+<td>xpub</td>
+<td>none</td>
+<td>If set, imports the given extended public key. The returned wallet will be watch only.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="list-wallets">List Wallets</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan wallets</code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> http://localhost:12039/api/v1/wallets</code></pre>
+<blockquote>
+<p>JSON response:</p>
+</blockquote>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"wallets"</span><span class="token operator">:</span> <span class="token punctuation">[</span><br>    <span class="token string">"primary"</span><br>  <span class="token punctuation">]</span><br><span class="token punctuation">}</span></code></pre>
+<p>Lists the wallets Gohan knows about.</p>
+<h3 id="http-request-2">HTTP Request</h3>
+<p><code>GET /api/v1/wallets</code></p>
+<h2 id="list-wallet-accounts">List Wallet Accounts</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan accounts</code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> https://localhsot:12039/api/v1/wallets/:wallet_name/accounts</code></pre>
+<blockquote>
+<p>JSON response:</p>
+</blockquote>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"accounts"</span><span class="token operator">:</span> <span class="token punctuation">[</span><br>    <span class="token string">"default"</span><br>  <span class="token punctuation">]</span><br><span class="token punctuation">}</span></code></pre>
+<p>Lists the BIP-44 accounts this wallet knows about.</p>
+<h3 id="http-request-3">HTTP Request</h3>
+<p><code>GET /api/v1/wallets/:wallet_name/accounts</code></p>
+<h2 id="unlock">Unlock</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan unlock</code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> -X POST --data <span class="token string">'{"password": "your-password"}'</span> https://localhost:12039/api/v1/wallets/:wallet_name/unlock</code></pre>
+<blockquote>
+<p>Response code:</p>
+</blockquote>
+<pre><code>204 No Content
+</code></pre>
+<p>Unlocks the wallet and all its associated accounts.</p>
+<h3 id="http-request-4">HTTP Request</h3>
+<p><code>POST /api/v1/wallets/:wallet_name/unlock</code></p>
+<h2 id="lock">Lock</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan lock</code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> -X POST https://localhost:12039/api/v1/wallets/:wallet_name/lock</code></pre>
+<blockquote>
+<p>Response code:</p>
+</blockquote>
+<pre><code>204 No Content
+</code></pre>
+<p>Locks the wallet and all its associated accounts.</p>
+<h3 id="http-request-5">HTTP Request</h3>
+<p><code>POST /api/v1/wallets/:wallet_name/lock</code></p>
+<h1 id="accounts">Accounts</h1>
+<h2 id="get-info">Get Info</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan info</code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> http://localhost:12039/api/v1/wallets/:wallet_name/accounts/:account_name</code></pre>
+<blockquote>
+<p>JSON response:</p>
+</blockquote>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"default"</span><span class="token punctuation">,</span><br>  <span class="token property">"index"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span><br>  <span class="token property">"wallet_name"</span><span class="token operator">:</span> <span class="token string">"primary"</span><span class="token punctuation">,</span><br>  <span class="token property">"balances"</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>    <span class="token property">"available"</span><span class="token operator">:</span> <span class="token number">11939946000</span><span class="token punctuation">,</span><br>    <span class="token property">"immature"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span><br>    <span class="token property">"bid_locked"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span><br>    <span class="token property">"reveal_locked"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span><br>    <span class="token property">"name_locked"</span><span class="token operator">:</span> <span class="token number">0</span><br>  <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  <span class="token property">"address_depth"</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>    <span class="token property">"receive"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span><br>    <span class="token property">"change"</span><span class="token operator">:</span> <span class="token number">4</span><br>  <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  <span class="token property">"lookahead_depth"</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>    <span class="token property">"receive"</span><span class="token operator">:</span> <span class="token number">1001</span><span class="token punctuation">,</span><br>    <span class="token property">"change"</span><span class="token operator">:</span> <span class="token number">1003</span><br>  <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  <span class="token property">"receive_address"</span><span class="token operator">:</span> <span class="token string">"rs1qztdtxtrcdvkyxsk5r8fhyymh0mw6ju338pe9wg"</span><span class="token punctuation">,</span><br>  <span class="token property">"change_address"</span><span class="token operator">:</span> <span class="token string">"rs1qmycfs2zf4mtsx5q5y04dpe00jyx3run76mt8nn"</span><span class="token punctuation">,</span><br>  <span class="token property">"xpub"</span><span class="token operator">:</span> <span class="token string">"rpubKBBUaydwRpVxLcm8YESMRikrSFRG9nsXDquhppVigpKymkS6fhoKxxJa1Ud76TgHUMMrvAvqJXyxkJKjWdmX6uSkQNYKHnuqDnDsLSVyVQnQ"</span><span class="token punctuation">,</span><br>  <span class="token property">"rescan_height"</span><span class="token operator">:</span> <span class="token number">36</span><br><span class="token punctuation">}</span></code></pre>
+<p>Returns balance, address, and rescan info about an account.</p>
+<h3 id="http-request-6">HTTP Request</h3>
+<p><code>GET /api/v1/wallets/:wallet_name/accounts/:account_name</code></p>
+<h3 id="balance-types">Balance Types</h3>
+<p>Determining a Handshake wallet’s balance is complex, since coins can be locked up for extended periods of time in name auctions. Gohan tries to make this simpler by returning four different balance types:</p>
+<table>
+<thead>
+<tr>
+<th>Balance Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Available</td>
+<td>Funds available to be spent.</td>
+</tr>
+<tr>
+<td>Immature</td>
+<td>Coinbases or airdrops that will be spendable once they mature.</td>
+</tr>
+<tr>
+<td>Bid Locked</td>
+<td>Funds locked in bids.</td>
+</tr>
+<tr>
+<td>Reveal Locked</td>
+<td>Funds locked in reveals.</td>
+</tr>
+<tr>
+<td>Name Locked</td>
+<td>Funds burned after winning a name auction.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="get-transactions">Get Transactions</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan transactions <span class="token punctuation">[</span>count<span class="token punctuation">]</span> <span class="token punctuation">[</span>offset<span class="token punctuation">]</span><br><br><span class="token comment"># or, alternatively:</span><br><br>gohan txs <span class="token punctuation">[</span>count<span class="token punctuation">]</span> <span class="token punctuation">[</span>offset<span class="token punctuation">]</span></code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> http://localhost:12039/api/v1/wallets/:wallet_name/accounts/:account_name/transactions?count<span class="token operator">=</span><span class="token operator">&lt;</span>count<span class="token operator">>&amp;</span><span class="token assign-left variable">offset</span><span class="token operator">=</span><span class="token operator">&lt;</span>offset<span class="token operator">></span></code></pre>
+<blockquote>
+<p>JSON response:</p>
+</blockquote>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"transactions"</span><span class="token operator">:</span> <span class="token punctuation">[</span><br>    <span class="token punctuation">{</span><br>      <span class="token property">"hash"</span><span class="token operator">:</span> <span class="token string">"2840c896226bb6135a04d6b4103eb71ea443f7b1ba075090bd24dc02f243222a"</span><span class="token punctuation">,</span><br>      <span class="token property">"height"</span><span class="token operator">:</span> <span class="token number">25</span><span class="token punctuation">,</span><br>      <span class="token property">"block"</span><span class="token operator">:</span> <span class="token string">"55400661261f207e36b746300831aa32d8d16ea3fd969cc7f6df6fa7d8841280"</span><span class="token punctuation">,</span><br>      <span class="token property">"time"</span><span class="token operator">:</span> <span class="token number">1623358754</span><span class="token punctuation">,</span><br>      <span class="token property">"index"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span><br>      <span class="token property">"version"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span><br>      <span class="token property">"inputs"</span><span class="token operator">:</span> <span class="token punctuation">[</span><br>        <span class="token punctuation">{</span><br>          <span class="token property">"prevout"</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>            <span class="token property">"hash"</span><span class="token operator">:</span> <span class="token string">"0000000000000000000000000000000000000000000000000000000000000000"</span><span class="token punctuation">,</span><br>            <span class="token property">"index"</span><span class="token operator">:</span> <span class="token number">4294967295</span><br>          <span class="token punctuation">}</span><span class="token punctuation">,</span><br>          <span class="token property">"witness"</span><span class="token operator">:</span> <span class="token punctuation">[</span><br>            <span class="token string">"6d696e656420627920687364"</span><span class="token punctuation">,</span><br>            <span class="token string">"f0ba89cd353becd5"</span><span class="token punctuation">,</span><br>            <span class="token string">"0000000000000000"</span><br>          <span class="token punctuation">]</span><span class="token punctuation">,</span><br>          <span class="token property">"sequence"</span><span class="token operator">:</span> <span class="token number">450522216</span><span class="token punctuation">,</span><br>          <span class="token property">"coin"</span><span class="token operator">:</span> <span class="token null keyword">null</span><br>        <span class="token punctuation">}</span><br>      <span class="token punctuation">]</span><span class="token punctuation">,</span><br>      <span class="token property">"outputs"</span><span class="token operator">:</span> <span class="token punctuation">[</span><br>        <span class="token punctuation">{</span><br>          <span class="token property">"value"</span><span class="token operator">:</span> <span class="token number">2000000000</span><span class="token punctuation">,</span><br>          <span class="token property">"address"</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>            <span class="token property">"address"</span><span class="token operator">:</span> <span class="token string">"rs1qedtqrtu8eavsl7sepgy3fp336966pqxmyhnquc"</span><span class="token punctuation">,</span><br>            <span class="token property">"derivation"</span><span class="token operator">:</span> <span class="token string">"m/0/0"</span><span class="token punctuation">,</span><br>            <span class="token property">"own"</span><span class="token operator">:</span> <span class="token boolean">true</span><br>          <span class="token punctuation">}</span><span class="token punctuation">,</span><br>          <span class="token property">"covenant"</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span><br>            <span class="token property">"action"</span><span class="token operator">:</span> <span class="token string">"NONE"</span><span class="token punctuation">,</span><br>            <span class="token property">"items"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><br>          <span class="token punctuation">}</span><br>        <span class="token punctuation">}</span><br>      <span class="token punctuation">]</span><span class="token punctuation">,</span><br>      <span class="token property">"hex"</span><span class="token operator">:</span> <span class="token string">"00000000010000000000000000000000000000000000000000000000000000000000000000ffffffff686cda1a0100943577000000000014cb5601af87cf590ffa190a09148631d175a080db000019000000030c6d696e65642062792068736408f0ba89cd353becd5080000000000000000"</span><span class="token punctuation">,</span><br>      <span class="token property">"fee"</span><span class="token operator">:</span> <span class="token number">0</span><br>    <span class="token punctuation">}</span><br>  <span class="token punctuation">]</span><span class="token punctuation">,</span><br>  <span class="token property">"count"</span><span class="token operator">:</span> <span class="token number">123</span><br><span class="token punctuation">}</span></code></pre>
+<p>Lists the transactions involving this account.</p>
+<h3 id="http-request-7">HTTP Request</h3>
+<p><code>GET /api/v1/wallets/:wallet_name/accounts/:account_name/transactions</code></p>
+<h3 id="query-parameters">Query Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>count</td>
+<td>50</td>
+<td>Number of transactions to return.</td>
+</tr>
+<tr>
+<td>offest</td>
+<td>0</td>
+<td>Number of transactions to skip.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="get-names">Get Names</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan names <span class="token punctuation">[</span>count<span class="token punctuation">]</span> <span class="token punctuation">[</span>offset<span class="token punctuation">]</span></code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> http://localhost:12039/api/v1/wallets/:wallet_name/accounts/:account_name/names?count<span class="token operator">=</span><span class="token operator">&lt;</span>count<span class="token operator">>&amp;</span><span class="token assign-left variable">offset</span><span class="token operator">=</span><span class="token operator">&lt;</span>offset<span class="token operator">></span></code></pre>
+<blockquote>
+<p>JSON response:</p>
+</blockquote>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"names"</span><span class="token operator">:</span> <span class="token punctuation">[</span><br>    <span class="token punctuation">{</span><br>      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"superdope"</span><span class="token punctuation">,</span><br>      <span class="token property">"hash"</span><span class="token operator">:</span> <span class="token string">"61e4969faa9903e88ac3be9dfbd744d48864fca10eae31cefecb16bb4b24d922"</span><span class="token punctuation">,</span><br>      <span class="token property">"status"</span><span class="token operator">:</span> <span class="token string">"UNOWNED"</span><br>    <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><br>      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"chips"</span><span class="token punctuation">,</span><br>      <span class="token property">"hash"</span><span class="token operator">:</span> <span class="token string">"f11bfeae0c2007312ec8071fc66500cded6faeefeb1378237e23211d90049643"</span><span class="token punctuation">,</span><br>      <span class="token property">"status"</span><span class="token operator">:</span> <span class="token string">"TRANSFERRED"</span><br>    <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><br>      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"shakedex"</span><span class="token punctuation">,</span><br>      <span class="token property">"hash"</span><span class="token operator">:</span> <span class="token string">"e1dfddd001a6ff65e8a3aa565cc5014f6506ef60243f9155a44f0a472314bf8f"</span><span class="token punctuation">,</span><br>      <span class="token property">"status"</span><span class="token operator">:</span> <span class="token string">"OWNED"</span><br>    <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><br>      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"silverhand"</span><span class="token punctuation">,</span><br>      <span class="token property">"hash"</span><span class="token operator">:</span> <span class="token string">"ea175debd94bf73540e6a17c8f398ba36076507dde79dba6cc4dad5d532680a4"</span><span class="token punctuation">,</span><br>      <span class="token property">"status"</span><span class="token operator">:</span> <span class="token string">"TRANSFERRED"</span><br>    <span class="token punctuation">}</span><br>  <span class="token punctuation">]</span><span class="token punctuation">,</span><br>  <span class="token property">"count"</span><span class="token operator">:</span> <span class="token number">123</span><br><span class="token punctuation">}</span></code></pre>
+<p>Lists names involving this account. This includes any name the account has opened, bid on, or won.</p>
+<h3 id="http-request-8">HTTP Request</h3>
+<p><code>GET /api/v1/wallets/:wallet_name/accounts/:account_name/names</code></p>
+<h3 id="query-parameters-1">Query Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>count</td>
+<td>50</td>
+<td>Number of transactions to return.</td>
+</tr>
+<tr>
+<td>offest</td>
+<td>0</td>
+<td>Number of transactions to skip.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="get-name-history">Get Name History</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan name-history <span class="token operator">&lt;</span>name<span class="token operator">></span></code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> http://localhost:12039/api/v1/wallets/:wallet_name/accounts/:account_name/:name</code></pre>
+<blockquote>
+<p>JSON response:</p>
+</blockquote>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"history"</span><span class="token operator">:</span> <span class="token punctuation">[</span><br>    <span class="token punctuation">{</span><br>      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"whncsjjgtc"</span><span class="token punctuation">,</span><br>      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"FINALIZE_OUT"</span><span class="token punctuation">,</span><br>      <span class="token property">"out_idx"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span><br>      <span class="token property">"parent_tx_hash"</span><span class="token operator">:</span> <span class="token string">"05e52af86197be24b2a5d87d00209ecc18dff4af8ade10fb9cc3150bcd657730"</span><span class="token punctuation">,</span><br>      <span class="token property">"parent_out_idx"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span><br>      <span class="token property">"transaction"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><br>    <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><br>      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"whncsjjgtc"</span><span class="token punctuation">,</span><br>      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"TRANSFER"</span><span class="token punctuation">,</span><br>      <span class="token property">"out_idx"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span><br>      <span class="token property">"parent_tx_hash"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span><br>      <span class="token property">"parent_out_idx"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span><br>      <span class="token property">"transaction"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><br>    <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><br>      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"whncsjjgtc"</span><span class="token punctuation">,</span><br>      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"REGISTER"</span><span class="token punctuation">,</span><br>      <span class="token property">"out_idx"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span><br>      <span class="token property">"parent_tx_hash"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span><br>      <span class="token property">"parent_out_idx"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span><br>      <span class="token property">"transaction"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><br>    <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><br>      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"whncsjjgtc"</span><span class="token punctuation">,</span><br>      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"REDEEM"</span><span class="token punctuation">,</span><br>      <span class="token property">"out_idx"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span><br>      <span class="token property">"parent_tx_hash"</span><span class="token operator">:</span> <span class="token string">"c83ffe91abd049a2f0852ab2f43f9b46771ca3e0efe773a74d079952cecf3ce4"</span><span class="token punctuation">,</span><br>      <span class="token property">"parent_out_idx"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span><br>      <span class="token property">"transaction"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><br>    <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><br>      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"whncsjjgtc"</span><span class="token punctuation">,</span><br>      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"REVEAL"</span><span class="token punctuation">,</span><br>      <span class="token property">"out_idx"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span><br>      <span class="token property">"parent_tx_hash"</span><span class="token operator">:</span> <span class="token string">"17fbc4892fba7f9d15aea9089366c97e770f4b0e0b8187b881b2739007c255ee"</span><span class="token punctuation">,</span><br>      <span class="token property">"parent_out_idx"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span><br>      <span class="token property">"transaction"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><br>    <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><br>      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"whncsjjgtc"</span><span class="token punctuation">,</span><br>      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"REVEAL"</span><span class="token punctuation">,</span><br>      <span class="token property">"out_idx"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span><br>      <span class="token property">"parent_tx_hash"</span><span class="token operator">:</span> <span class="token string">"4a4f5fdcacc50b5cfa15ecdaea7d6e67d4be8a99e16c1ddb9bd53f996f13607f"</span><span class="token punctuation">,</span><br>      <span class="token property">"parent_out_idx"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span><br>      <span class="token property">"transaction"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><br>    <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><br>      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"whncsjjgtc"</span><span class="token punctuation">,</span><br>      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"BID"</span><span class="token punctuation">,</span><br>      <span class="token property">"out_idx"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span><br>      <span class="token property">"bid_amount"</span><span class="token operator">:</span> <span class="token number">123</span><span class="token punctuation">,</span><br>      <span class="token property">"parent_tx_hash"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span><br>      <span class="token property">"parent_out_idx"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span><br>      <span class="token property">"transaction"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><br>    <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><br>      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"whncsjjgtc"</span><span class="token punctuation">,</span><br>      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"BID"</span><span class="token punctuation">,</span><br>      <span class="token property">"out_idx"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span><br>      <span class="token property">"bid_amount"</span><span class="token operator">:</span> <span class="token number">234</span><span class="token punctuation">,</span><br>      <span class="token property">"parent_tx_hash"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span><br>      <span class="token property">"parent_out_idx"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span><br>      <span class="token property">"transaction"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><br>    <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><br>      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"whncsjjgtc"</span><span class="token punctuation">,</span><br>      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"OPEN"</span><span class="token punctuation">,</span><br>      <span class="token property">"out_idx"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span><br>      <span class="token property">"parent_tx_hash"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span><br>      <span class="token property">"parent_out_idx"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span><br>      <span class="token property">"transaction"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><br>    <span class="token punctuation">}</span><br>  <span class="token punctuation">]</span><br><span class="token punctuation">}</span></code></pre>
+<aside class="notice">
+  The returned transaction data is identical to the get transactions endpoint. Transaction data has been removed from the JSON response for brevity.
+</aside>
+<p>Returns the history between this account and the provided name. The following events are tracked:</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OPEN</td>
+<td>This wallet opened the name.</td>
+</tr>
+<tr>
+<td>BID</td>
+<td>This wallet bid on the name.</td>
+</tr>
+<tr>
+<td>REVEAL</td>
+<td>This wallet revealed a bid on the name.</td>
+</tr>
+<tr>
+<td>REDEEM</td>
+<td>This wallet redeemed a bid on the name.</td>
+</tr>
+<tr>
+<td>REGISTER</td>
+<td>This wallet registered the name.</td>
+</tr>
+<tr>
+<td>TRANSFER</td>
+<td>This wallet initiated a transfer of the name.</td>
+</tr>
+<tr>
+<td>FINALIZE_OUT</td>
+<td>This wallet finalized the transfer of the name to someone else.</td>
+</tr>
+<tr>
+<td>FINALIZE_IN</td>
+<td>This wallet received this name after someone else finalized a transfer.</td>
+</tr>
+<tr>
+<td>REVOKE</td>
+<td>This wallet revoked the name.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="http-request-9">HTTP Request</h3>
+<p><code>GET /api/v1/wallets/:wallet_name/accounts/:account_name/names/:name</code></p>
+<h2 id="get-unspent-bids">Get Unspent Bids</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan unspent-bids</code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> http://localhost:12037/api/v1/wallets/:wallet_name/accounts/:account_name/unspent_bids</code></pre>
+<blockquote>
+<p>JSON response:</p>
+</blockquote>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"unspent_bids"</span><span class="token operator">:</span> <span class="token punctuation">[</span><br>    <span class="token punctuation">{</span><br>      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"foobar"</span><span class="token punctuation">,</span><br>      <span class="token property">"block_height"</span><span class="token operator">:</span> <span class="token number">1234</span><span class="token punctuation">,</span><br>      <span class="token property">"lockup"</span><span class="token operator">:</span> <span class="token number">10000</span><span class="token punctuation">,</span><br>      <span class="token property">"bid_value"</span><span class="token operator">:</span> <span class="token number">5000</span><span class="token punctuation">,</span><br>      <span class="token property">"tx_hash"</span><span class="token operator">:</span> <span class="token string">"61e4969faa9903e88ac3be9dfbd744d48864fca10eae31cefecb16bb4b24d922"</span><span class="token punctuation">,</span><br>      <span class="token property">"out_idx"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span><br>      <span class="token property">"revealable"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span><br>      <span class="token property">"revealable_block"</span><span class="token operator">:</span> <span class="token number">1230</span><br>    <span class="token punctuation">}</span><br>  <span class="token punctuation">]</span><br><span class="token punctuation">}</span></code></pre>
+<p>Lists all bids that haven’t been revealed yet.</p>
+<h3 id="http-request-10">HTTP Request</h3>
+<p><code>GET /api/v1/wallets/:wallet_name/accounts/:account_name/unspent_bids</code></p>
+<h2 id="get-unspent-reveals">Get Unspent Reveals</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan unspent-reveals</code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> http://localhost:12037/api/v1/wallets/:wallet_name/accounts/:account_name/unspent_reveals</code></pre>
+<blockquote>
+<p>JSON response:</p>
+</blockquote>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"unspent_reveals"</span><span class="token operator">:</span> <span class="token punctuation">[</span><br>    <span class="token punctuation">{</span><br>      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"foobar"</span><span class="token punctuation">,</span><br>      <span class="token property">"block_height"</span><span class="token operator">:</span> <span class="token number">1234</span><span class="token punctuation">,</span><br>      <span class="token property">"lockup"</span><span class="token operator">:</span> <span class="token number">10000</span><span class="token punctuation">,</span><br>      <span class="token property">"bid_value"</span><span class="token operator">:</span> <span class="token number">5000</span><span class="token punctuation">,</span><br>      <span class="token property">"tx_hash"</span><span class="token operator">:</span> <span class="token string">"61e4969faa9903e88ac3be9dfbd744d48864fca10eae31cefecb16bb4b24d922"</span><span class="token punctuation">,</span><br>      <span class="token property">"out_idx"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span><br>      <span class="token property">"redeemable"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span><br>      <span class="token property">"redeemable_block"</span><span class="token operator">:</span> <span class="token number">1230</span><br>    <span class="token punctuation">}</span><br>  <span class="token punctuation">]</span><br><span class="token punctuation">}</span></code></pre>
+<p>Lists all reveals that haven’t been redeemed yet.</p>
+<h3 id="http-request-11">HTTP Request</h3>
+<p><code>GET /api/v1/wallets/:wallet_name/accounts/:account_name/unspent_reveals</code></p>
+<h2 id="rescan">Rescan</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan rescan <span class="token operator">&lt;</span>height<span class="token operator">></span></code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> -X POST --data <span class="token string">'{"height": 1234}'</span> http://localhost:12037/api/v1/wallets/:wallet_name/accounts/:account_name/rescan</code></pre>
+<blockquote>
+<p>Return code:</p>
+</blockquote>
+<pre><code>204 No Content
+</code></pre>
+<p>Rolls the account back to the specified block, then rescans transactions.</p>
+<h3 id="http-request-12">HTTP Request</h3>
+<p><code>POST /api/v1/wallets/:wallet_name/accounts/:account_name/rescan</code></p>
+<h3 id="json-parameters-1">JSON Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>height</td>
+<td>1</td>
+<td>The height to roll back to.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="zap">Zap</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan zap</code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> -X POST http://localhost:12037/api/v1/wallets/:wallet_name/accounts/:account_name/zap</code></pre>
+<blockquote>
+<p>Return code:</p>
+</blockquote>
+<pre><code>204 No Content
+</code></pre>
+<p>Removes pending transactions. Useful is you have a transaction that is “stuck” in the mempool.</p>
+<h3 id="http-request-13">HTTP Request</h3>
+<p><code>POST /api/v1/wallets/:wallet_name/accounts/:account_name/zap</code></p>
+<h2 id="sign-message">Sign Message</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan sign-message <span class="token operator">&lt;</span>address<span class="token operator">></span> <span class="token operator">&lt;</span>message<span class="token operator">></span></code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> -X POST --data <span class="token string">'{"address": "rs1qedtqrtu8eavsl7sepgy3fp336966pqxmyhnquc", "message": "falafels"}'</span> http://localhost:12037/api/v1/wallets/:wallet_name/accounts/:account_name/sign_message</code></pre>
+<blockquote>
+<p>JSON response:</p>
+</blockquote>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"signature"</span><span class="token operator">:</span> <span class="token string">"KJfZtbcgAKzlBKvo5rvQ0Mf9nJY1HtwVnNaGDId2BnF7SDoK7Myu/UGE859tO69hEA4NWQBeFx2ifi0oDIX5eA=="</span><br><span class="token punctuation">}</span></code></pre>
+<p>Signs a message using the private key associated with the specified address.</p>
+<h3 id="http-request-14">HTTP Request</h3>
+<p><code>GET /api/v1/wallets/:wallet_name/accounts/:account_name/sign_message</code></p>
+<h3 id="json-parameters-2">JSON Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>address</td>
+<td>none</td>
+<td>The address whose private key will be used to sign the message.</td>
+</tr>
+<tr>
+<td>message</td>
+<td>none</td>
+<td>The message to sign.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sign-message-with-name">Sign Message With Name</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan sign-message-with-name <span class="token operator">&lt;</span>name<span class="token operator">></span> <span class="token operator">&lt;</span>message<span class="token operator">></span></code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> -X POST --data <span class="token string">'{"name": "foobar", "message": "falafels"}'</span> http://localhost:12037/api/v1/wallets/:wallet_name/accounts/:account_name/sign_message_with_name</code></pre>
+<blockquote>
+<p>JSON response:</p>
+</blockquote>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"signature"</span><span class="token operator">:</span> <span class="token string">"KJfZtbcgAKzlBKvo5rvQ0Mf9nJY1HtwVnNaGDId2BnF7SDoK7Myu/UGE859tO69hEA4NWQBeFx2ifi0oDIX5eA=="</span><br><span class="token punctuation">}</span></code></pre>
+<p>Signs a message using the private key associated with the address that owns the specified name.</p>
+<h3 id="http-request-15">HTTP Request</h3>
+<p><code>GET /api/v1/wallets/:wallet_name/accounts/:account_name/sign_message_with_name</code></p>
+<h3 id="json-parameters-3">JSON Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>The name whose owner’s private key will be used to sign the message.</td>
+</tr>
+<tr>
+<td>message</td>
+<td>none</td>
+<td>The message to sign.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="sending-transactions">Sending Transactions</h1>
+<p>The following endpoints create and send transactions. Gohan must be unlocked before these endpoints will work.</p>
+<p>All of the below endpoints optionally accept two additional JSON request parameters:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fee_rate</td>
+<td>HSD smart fee</td>
+<td>Sets the fee rate for the transaction.</td>
+</tr>
+<tr>
+<td>create_only</td>
+<td>false</td>
+<td>Create and fund the transaction, but do not send it.</td>
+</tr>
+</tbody>
+</table>
+<p>All transaction endpoints return a transaction object formatted like those returned by the get transactions endpoint.</p>
+<aside class="warning">
+  Just like in HSD, the CLI expresses monetary values in <em>whole HNS</em>. The API, on the other hand, expresses them in subunits.
+</aside>
+<h2 id="send-funds">Send Funds</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan send <span class="token operator">&lt;</span>recipient-address<span class="token operator">></span> <span class="token operator">&lt;</span>amount-whole-hns<span class="token operator">></span> <span class="token punctuation">[</span>override-fee-rate-subunits<span class="token punctuation">]</span></code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> -X POST --data <span class="token string">'{"value": 123, "address": "rs1qedtqrtu8eavsl7sepgy3fp336966pqxmyhnquc"}'</span> http://localhost:12037/api/v1/wallets/:wallet_name/accounts/:account_name/sends</code></pre>
+<p>Sends funds to the specified address.</p>
+<h3 id="http-request-16">HTTP Request</h3>
+<p><code>POST /api/v1/wallets/:wallet_name/accounts/:account_name/sends</code></p>
+<h3 id="json-parameters%3A">JSON Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>value</td>
+<td>none</td>
+<td>The amount to send.</td>
+</tr>
+<tr>
+<td>address</td>
+<td>none</td>
+<td>The address to send funds to.</td>
+</tr>
+<tr>
+<td>fee_rate</td>
+<td>HSD smart fee</td>
+<td>Sets the fee rate for the transaction.</td>
+</tr>
+<tr>
+<td>create_only</td>
+<td>false</td>
+<td>Create and fund the transaction, but do not send it.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="send-open">Send Open</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan <span class="token function">open</span> <span class="token operator">&lt;</span>name<span class="token operator">></span> <span class="token punctuation">[</span>override-fee-rate-subunits<span class="token punctuation">]</span></code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> -X POST --data <span class="token string">'{"name": "foobar"}'</span> http://localhost:12037/api/v1/wallets/:wallet_name/accounts/:account_name/opens</code></pre>
+<p>Opens a name for bidding.</p>
+<h3 id="http-request-17">HTTP Request</h3>
+<p><code>POST /api/v1/wallets/:wallet_name/accounts/:account_name/opens</code></p>
+<h3 id="json-parameters%3A-1">JSON Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>The name to open for bidding.</td>
+</tr>
+<tr>
+<td>fee_rate</td>
+<td>HSD smart fee</td>
+<td>Sets the fee rate for the transaction.</td>
+</tr>
+<tr>
+<td>create_only</td>
+<td>false</td>
+<td>Create and fund the transaction, but do not send it.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="send-bid">Send Bid</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan bid <span class="token operator">&lt;</span>name<span class="token operator">></span> <span class="token operator">&lt;</span>bid-amount-whole-hns<span class="token operator">></span> <span class="token operator">&lt;</span>blind-amount-whole-hns<span class="token operator">></span> <span class="token punctuation">[</span>override-fee-rate-subunits<span class="token punctuation">]</span></code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> -X POST --data <span class="token string">'{"name": "foobar", "value": 1234, "lockup": 4321}'</span> http://localhost:12037/api/v1/wallets/:wallet_name/accounts/:account_name/bids</code></pre>
+<p>Places a bid on a name.</p>
+<h3 id="http-request-18">HTTP Request</h3>
+<p><code>POST /api/v1/wallets/:wallet_name/accounts/:account_name/bids</code></p>
+<h3 id="json-parameters%3A-2">JSON Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>The name to bid on.</td>
+</tr>
+<tr>
+<td>value</td>
+<td>none</td>
+<td>The real amount of the bid.</td>
+</tr>
+<tr>
+<td>lockup</td>
+<td>none</td>
+<td>The “blinded” amount of the bid that will be broadcast on chain.</td>
+</tr>
+<tr>
+<td>fee_rate</td>
+<td>HSD smart fee</td>
+<td>Sets the fee rate for the transaction.</td>
+</tr>
+<tr>
+<td>create_only</td>
+<td>false</td>
+<td>Create and fund the transaction, but do not send it.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="send-reveal">Send Reveal</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan reveal <span class="token operator">&lt;</span>name<span class="token operator">></span> <span class="token punctuation">[</span>override-fee-rate-subunits<span class="token punctuation">]</span></code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> -X POST --data <span class="token string">'{"name": "foobar"}'</span> http://localhost:12037/api/v1/wallets/:wallet_name/accounts/:account_name/reveals</code></pre>
+<p>Reveals all bids placed on a name.</p>
+<h3 id="http-request-19">HTTP Request</h3>
+<p><code>POST /api/v1/wallets/:wallet_name/accounts/:account_name/reveals</code></p>
+<h3 id="json-parameters%3A-3">JSON Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>The name to reveal bids for.</td>
+</tr>
+<tr>
+<td>fee_rate</td>
+<td>HSD smart fee</td>
+<td>Sets the fee rate for the transaction.</td>
+</tr>
+<tr>
+<td>create_only</td>
+<td>false</td>
+<td>Create and fund the transaction, but do not send it.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="send-redeem">Send Redeem</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan redeem <span class="token operator">&lt;</span>name<span class="token operator">></span> <span class="token punctuation">[</span>override-fee-rate-subunits<span class="token punctuation">]</span></code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> -X POST --data <span class="token string">'{"name": "foobar"}'</span> http://localhost:12037/api/v1/wallets/:wallet_name/accounts/:account_name/redeems</code></pre>
+<p>Redeems all losing reveals for a name. Redeeming a reveal makes its value available to be spent again.</p>
+<h3 id="http-request-20">HTTP Request</h3>
+<p><code>POST /api/v1/wallets/:wallet_name/accounts/:account_name/redeems</code></p>
+<h3 id="json-parameters%3A-4">JSON Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>The name to redeem reveals for.</td>
+</tr>
+<tr>
+<td>fee_rate</td>
+<td>HSD smart fee</td>
+<td>Sets the fee rate for the transaction.</td>
+</tr>
+<tr>
+<td>create_only</td>
+<td>false</td>
+<td>Create and fund the transaction, but do not send it.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="send-update">Send Update</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan update <span class="token operator">&lt;</span>name<span class="token operator">></span> <span class="token operator">&lt;</span>resource<span class="token operator">></span> <span class="token punctuation">[</span>override-fee-rate-subunits<span class="token punctuation">]</span></code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> -X POST --data <span class="token string">'{"name": "foobar", "resource": {"records": [{"type": "TXT", "txt": ["hello"]}]}}'</span> http://localhost:12037/api/v1/wallets/:wallet_name/accounts/:account_name/updates</code></pre>
+<p>Updates a name’s DNS records. The format of the <code>resource</code> parameter is identical to the parameter in HSD.</p>
+<h3 id="http-request-21">HTTP Request</h3>
+<p><code>POST /api/v1/wallets/:wallet_name/accounts/:account_name/updates</code></p>
+<h3 id="json-parameters%3A-5">JSON Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>The name to redeem reveals for.</td>
+</tr>
+<tr>
+<td>resource</td>
+<td>none</td>
+<td>The name’s DNS records.</td>
+</tr>
+<tr>
+<td>fee_rate</td>
+<td>HSD smart fee</td>
+<td>Sets the fee rate for the transaction.</td>
+</tr>
+<tr>
+<td>create_only</td>
+<td>false</td>
+<td>Create and fund the transaction, but do not send it.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="send-transfer">Send Transfer</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan transfer <span class="token operator">&lt;</span>name<span class="token operator">></span> <span class="token operator">&lt;</span>recipient<span class="token operator">></span> <span class="token punctuation">[</span>override-fee-rate-subunits<span class="token punctuation">]</span></code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> -X POST --data <span class="token string">'{"name": "foobar", "address": "rs1qedtqrtu8eavsl7sepgy3fp336966pqxmyhnquc"}'</span> http://localhost:12037/api/v1/wallets/:wallet_name/accounts/:account_name/transfers</code></pre>
+<p>Transfers a name to a different address.</p>
+<h3 id="http-request-22">HTTP Request</h3>
+<p><code>POST /api/v1/wallets/:wallet_name/accounts/:account_name/transfers</code></p>
+<h3 id="json-parameters%3A-6">JSON Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>The name to transfer.</td>
+</tr>
+<tr>
+<td>address</td>
+<td>none</td>
+<td>The address of the recipient.</td>
+</tr>
+<tr>
+<td>fee_rate</td>
+<td>HSD smart fee</td>
+<td>Sets the fee rate for the transaction.</td>
+</tr>
+<tr>
+<td>create_only</td>
+<td>false</td>
+<td>Create and fund the transaction, but do not send it.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="send-finalize">Send Finalize</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan finalize <span class="token operator">&lt;</span>name<span class="token operator">></span> <span class="token punctuation">[</span>override-fee-rate-subunits<span class="token punctuation">]</span></code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> -X POST --data <span class="token string">'{"name": "foobar"}'</span> http://localhost:12037/api/v1/wallets/:wallet_name/accounts/:account_name/finalizes</code></pre>
+<p>Finalizes a name transfer.</p>
+<h3 id="http-request-23">HTTP Request</h3>
+<p><code>POST /api/v1/wallets/:wallet_name/accounts/:account_name/finalizes</code></p>
+<h3 id="json-parameters%3A-7">JSON Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>The name to finalize.</td>
+</tr>
+<tr>
+<td>fee_rate</td>
+<td>HSD smart fee</td>
+<td>Sets the fee rate for the transaction.</td>
+</tr>
+<tr>
+<td>create_only</td>
+<td>false</td>
+<td>Create and fund the transaction, but do not send it.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="send-revoke">Send Revoke</h2>
+<blockquote>
+<p>Via CLI:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell">gohan revoke <span class="token operator">&lt;</span>name<span class="token operator">></span> <span class="token punctuation">[</span>override-fee-rate-subunits<span class="token punctuation">]</span></code></pre>
+<blockquote>
+<p>Via cURL:</p>
+</blockquote>
+<pre class="language-shell"><code class="language-shell"><span class="token function">curl</span> -X POST --data <span class="token string">'{"name": "foobar"}'</span> http://localhost:12037/api/v1/wallets/:wallet_name/accounts/:account_name/revokes</code></pre>
+<p>Revokes a name, releasing it back to the protocol for auction.</p>
+<h3 id="http-request-24">HTTP Request</h3>
+<p><code>POST /api/v1/wallets/:wallet_name/accounts/:account_name/revokes</code></p>
+<h3 id="json-parameters%3A-8">JSON Parameters:</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>The name to revoke.</td>
+</tr>
+<tr>
+<td>fee_rate</td>
+<td>HSD smart fee</td>
+<td>Sets the fee rate for the transaction.</td>
+</tr>
+<tr>
+<td>create_only</td>
+<td>false</td>
+<td>Create and fund the transaction, but do not send it.</td>
+</tr>
+</tbody>
+</table>
+
+      </div>
+      <div class="dark-box">
+        
+          <div class="lang-selector">
+            
+              
+                <a href="#" data-language-name="shell">shell</a>
+              
+            
+          </div>
+        
+      </div>
+    </div>
+  </body>
+</html>
